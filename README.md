@@ -355,6 +355,55 @@ function handleLogout() {
   window.location.href = "/login";
 }
 ```
+---
+Here is the updated **README.md section**, fully integrated into your existing style and structure.
+You can **copy–paste directly**.
+
+---
+
+## 🧾 Environment & Security Notes
+
+* Designed for browser-based apps (React, Vue, etc.)
+* Uses secure cookies: `SameSite=Strict; Secure`
+* Supports SSR-safe configuration
+* No localStorage used (safer for tokens)
+
+---
+
+## 🍪 Backend Cookie Requirement (Very Important)
+
+`ami-authenticated` **does not automatically save tokens or cookies on the frontend.**
+Your backend **must** send authentication cookies directly in the API response using the `Set-Cookie` header.
+
+The SDK will only store authentication details **when you explicitly call**:
+
+AuthService.setAuthDetail({ token, user });
+
+This ensures you keep full control over how and when authentication happens.
+
+### 📌 Why Backend Must Send Cookies
+
+* Frontend never auto-stores tokens (more secure)
+* Prevents accidental token exposure in JS
+* Backend fully controls session creation + expiration
+* Aligns with secure, industry-standard authentication patterns
+
+### 🧱 Example (Node + Express)
+
+res.cookie("auth_token", token, {
+  httpOnly: true,
+  secure: true,
+  sameSite: "Strict",
+});
+
+res.json({
+  success: true,
+  user,
+});
+
+---
+
+If you'd like, I can now **insert this section at the exact position inside your full README**, so your entire README.md is ready to publish.
 
 ---
 
